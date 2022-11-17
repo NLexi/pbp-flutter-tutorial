@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorialflutter/main.dart';
+import 'package:tutorialflutter/page/to_do_page.dart';
 
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
@@ -24,7 +25,44 @@ class _MyFormPageState extends State<MyFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Form'),
+        title: const Text('Form'),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            // Adding clickable menu
+            ListTile(
+              title: const Text('Counter'),
+              onTap: () {
+                // Routing the menu to the main page
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Form'),
+              onTap: () {
+                // Routing the menu to the form page
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyFormPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('To Do'),
+              onTap: () {
+                // Route the menu to the to do page
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ToDoPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -196,27 +234,25 @@ class _MyFormPageState extends State<MyFormPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             elevation: 15,
-                            child: Container(
-                              child: ListView(
-                                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                shrinkWrap: true,
-                                children: <Widget>[
-                                  Center(child: const Text('Informasi Data')),
-                                  SizedBox(height: 20),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Text(
-                                        'Full Name: $_fullName\n\nundergraduate: $undergraduateDegree\n\ndiploma: $diplomaDegree\n\nmasters: $masterDegree\n\ndoctor: $doctorDegree\n\nage: $age\n\nPBD class: $pdbClass'
-                                    ),
+                            child: ListView(
+                              padding: const EdgeInsets.only(top: 20, bottom: 20),
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                const Center(child: Text('Informasi Data')),
+                                const SizedBox(height: 20),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Text(
+                                      'Full Name: $_fullName\n\nundergraduate: $undergraduateDegree\n\ndiploma: $diplomaDegree\n\nmasters: $masterDegree\n\ndoctor: $doctorDegree\n\nage: $age\n\nPBD class: $pdbClass'
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Kembali'),
-                                  ),
-                                ],
-                              ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kembali'),
+                                ),
+                              ],
                             ),
                           );
                         },
